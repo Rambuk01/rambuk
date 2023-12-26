@@ -16,6 +16,9 @@ There we go. Our first todo template.
 <p>{{ todo.completed }}</p>
 <p>{{ todo.created_at }}</p>
 <p>{{ todo.due_date }}</p>
+<form action="{% url 'todo:delete-todo' todo.id %}" method='post'> {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
 {% endfor %}
 {% endif %}
 

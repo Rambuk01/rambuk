@@ -2,7 +2,13 @@
 {% block title %} My todo App {% endblock title %}
 {% block header %} My todo App {% endblock header %}
 {% block content %} 
-There we go. Our first todo template. 
+There we go. Our first todo template.
+<h1>Create Todo Item</h1>
+    <form action="{% url 'todo:create-todo' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 {% if todos %}
 {% for todo in todos %}
 <h1>{{todo.id}} - {{todo.title}}</h1>
@@ -12,8 +18,5 @@ There we go. Our first todo template.
 <p>{{ todo.due_date }}</p>
 {% endfor %}
 {% endif %}
-<form action='' method='post'>
-    {% csrf_token %}
-    <input id='' type='textfield'>
-</form>
+
 {% endblock content %}

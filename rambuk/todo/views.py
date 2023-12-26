@@ -1,22 +1,23 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.http import HttpResponse, Http404
 from .models import TodoItem
 from .forms import TodoItemForm
 # Create your views here.
 def index(request):
-    todos = TodoItem.objects.all()
-    return render(request, 'todo/index.html', {'todos': todos})
-
+    todos = TodoItem.objects.all().order_by('-created_at')
+    form = TodoItemForm()
+    return render(request, 'todo/index.html', {'form': form, 'todos': todos})
     #return HttpResponse("Hello there!", {'request': request})
 
 def create_todo(request):
-    
+    form = TodoItemForm()
+    todos = TodoItem.objects.all().order_by('-created_at')
     if request.method == 'POST':
         form = TodoItemForm(request.POST)
         if form.is_valid():
             form.save()
-            todos = TodoItem.objects.all()
-            return render(request, 'todo/index.html', {'todos': todos})
-    else:
-        form = TodoItemForm()
-    return render(request, 'todo/create-todo.html', {'form': form})
+            todos = TodoItem.objects.all().order_by('-created_at')
+            return HttpResponseRedirect(request.path_info)
+    return render(request, 'todo/index.html', {'todos': todos, 'form': form})
+    
+    

@@ -1,0 +1,10 @@
+{% extends "todo/base.html" %}
+{% block title %} My todo App {% endblock title %}
+{% block header %} My todo App {% endblock header %}
+{% block content %} 
+There we go. Our first todo template. 
+{% if todos %}
+Data value transmitted with the 'data' key: {{ todos }}
+{% endif %}
+
+{% endblock content %}

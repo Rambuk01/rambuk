@@ -4,7 +4,16 @@
 {% block content %} 
 There we go. Our first todo template. 
 {% if todos %}
-Data value transmitted with the 'data' key: {{ todos }}
+{% for todo in todos %}
+<h1>{{todo.id}} - {{todo.title}}</h1>
+<p>{{ todo.description }}</p>
+<p>{{ todo.completed }}</p>
+<p>{{ todo.created_at }}</p>
+<p>{{ todo.due_date }}</p>
+{% endfor %}
 {% endif %}
-
+<form action='' method='post'>
+    {% csrf_token %}
+    <input id='' type='textfield'>
+</form>
 {% endblock content %}

@@ -58,13 +58,15 @@ async function search_jobs() {
             }
         }
     
-        req.open('POST', '/ajax')
+        req.open('POST', '/ajax', true)
         req.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         var search_word_pass_to_js = document.getElementById('search_key_ajax').value
         req.send("search_word=" + search_word_pass_to_js) // var postVars = 'username='+un+'&secret='+sec .... you can add more like this..
         
     return false
 }
+
+
 
 async function sleep(seconds) {
     return new Promise((resolve) => setTimeout(resolve, seconds * 1000));

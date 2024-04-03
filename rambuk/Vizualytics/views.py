@@ -11,8 +11,9 @@ from django.views import generic
 from .functions.jobbean_functions import get_jobs_municipality
 
 def view_request(request):
-    data = {'key': 'value'}
-    return JsonResponse(data)
+    req_str = request.GET.get('param')
+    city_jobs_dict, total_jobs = get_jobs_municipality(req_str)
+    return JsonResponse(city_jobs_dict)
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")

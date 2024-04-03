@@ -6,7 +6,7 @@ let markers = [];
 let totalJobs = 0;
 let numberOfCities = 0;
 
-async function search_jobs() {
+async function search_jobs1() {
     var req = new XMLHttpRequest()
         req.onreadystatechange = async function()
         {
@@ -66,7 +66,63 @@ async function search_jobs() {
     return false
 }
 
+async function search_jobs() {
+  var xhr = new XMLHttpRequest();
+  var search_word_pass_to_js = document.getElementById('search_key_ajax').value
+  var url = '/ajax?param=' + search_word_pass_to_js
+  xhr.open('GET', url, true);
 
+  xhr.onload = async function () {
+    if (this.status === 200) {
+      var response = JSON.parse(this.responseText);
+      console.log(response);
+      // Handle the response data
+      var response = JSON.parse(xhr.responseText)
+      for (const [cityName, amountOfJobs] of Object.entries(response)) {
+          //console.log(`The key is: ${key}: And the value is: ${value}`);
+          // Now I need to get the latitude and longditude for each city (key).. how?
+          /*
+          var city = dkCities.find(item => item.city === key)
+          pos = {lat: Number(city.lat), lng: Number(city.lng)}
+          addMarker(pos)
+          */
+          numberOfCities += 1;
+          totalJobs += amountOfJobs
+      }
+      console.log(`The job average is: ${totalJobs / numberOfCities}`)
+      // Acces key (city name), value (amount of jobs) pair in the ajax response. I recieve city names and amount of jobs in that city.
+      for (const [cityName, amountOfJobs] of Object.entries(response)) {
+          //console.log(`The key is: ${key}: And the value is: ${value}`);
+          // Now I need to get the latitude and longditude for each city (key).. how?
+          /*
+          var city = dkCities.find(item => item.city === key)
+          pos = {lat: Number(city.lat), lng: Number(city.lng)}
+          addMarker(pos)
+          */
+          await sleep(1)
+          jobAverage = totalJobs / numberOfCities
+          jobsComparedToAverage = amountOfJobs/jobAverage
+          console.log(`${cityName}: ${jobAverage} :: ${amountOfJobs} out of ${totalJobs}`)
+          var stringNumber = "" + amountOfJobs
+          codeAddress(cityName, stringNumber, jobsComparedToAverage)
+      }
+      totalJobs = 0; // Reset total jobs. Unsure if its needed...
+      numberOfCities = 0;
+      // console.log(response.ajax_results)
+      //document.getElementById('ajax_results').innerHTML = response.ajax_results
+      //addMarker(lat_lng)
+    } else {
+      // Handle error case
+    }
+  };
+
+  xhr.onerror = function () {
+    // Handle network errors
+  };
+
+  var search_word_pass_to_js = document.getElementById('search_key_ajax').value
+  xhr.send() // var postVars = 'username='+un+'&secret='+sec .... you can add more like this..
+}
 
 async function sleep(seconds) {
     return new Promise((resolve) => setTimeout(resolve, seconds * 1000));

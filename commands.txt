@@ -1,2 +1,4 @@
-python manage.py runserver 127.0.0.1:8999
+python manage.py runserver 127.0.0.1:8000
 
+KILL PORTS
+sudo lsof -t -i tcp:8000 | xargs kill -9

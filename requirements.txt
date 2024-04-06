@@ -5,4 +5,5 @@ Django==5.0
 idna==3.6
 requests==2.31.0
 sqlparse==0.4.4
+typing_extensions==4.11.0
 urllib3==2.2.1

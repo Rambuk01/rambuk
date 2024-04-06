@@ -1,0 +1,25 @@
+{% extends "todo/base.html" %}
+{% block title %} My todo App {% endblock title %}
+{% block header %} My todo App {% endblock header %}
+{% block content %} 
+There we go. Our first todo template.
+<h1>Create Todo Item</h1>
+    <form action="{% url 'todo:create-todo' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% if todos %}
+{% for todo in todos %}
+<h1>{{todo.id}} - {{todo.title}}</h1>
+<p>{{ todo.description }}</p>
+<p>{{ todo.completed }}</p>
+<p>{{ todo.created_at }}</p>
+<p>{{ todo.due_date }}</p>
+<form action="{% url 'todo:delete-todo' todo.id %}" method='post'> {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+{% endfor %}
+{% endif %}
+
+{% endblock content %}

@@ -1,4 +1,4 @@
-#!/Users/mariofestersen/Documents/wdev/rambuk/env/bin/python3.12
+#!/Users/mariofestersen/Documents/wdev/rambuk/env/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys

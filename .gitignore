@@ -2,3 +2,8 @@
 
 # env
 env/
+
+
+# .pyc??
+
+*.cpython310.pyc

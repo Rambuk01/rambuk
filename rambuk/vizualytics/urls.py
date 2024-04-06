@@ -7,7 +7,7 @@ urlpatterns = [
     # added the word 'specifics'
     # path("specifics/<int:question_id>/", views.detail, name="detail"),
     #path('', views.index, name='index'),
-    path('asd/', views.IndexView.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('ajax/', views.view_request, name='view_request'),
     #path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     #path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
